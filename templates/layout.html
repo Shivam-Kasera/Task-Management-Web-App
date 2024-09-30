@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask To-Do App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-screen max-w-full">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="fixed z-[999] right-5 top-5" id="flash-messages">
+              {% for category, message in messages %}
+                <div class="{{ 'bg-green-100 border-green-400 text-green-700' if category == 'success' else 'bg-red-100 border-red-400 text-red-700' }} border px-4 py-3 rounded">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+    {% block content %}{% endblock %}
+</body>
+<script>
+  // setTimeout(function() {
+  //   let flashMessages = document.getElementById('flash-messages');
+  //   if (flashMessages) {
+  //     flashMessages.style.display = 'none';
+  //   }
+  // }, 3000);
+</script>
+</html>

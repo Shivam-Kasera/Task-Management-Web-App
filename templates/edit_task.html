@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<section class="w-screen max-w-full flex flex-col items-center py-10">
+    <form class="w-1/2 sticky top-0 bg-white gap-5 flex flex-col" method="post" action="{{ url_for('edit_task', task_id=task.id) }}">
+        <h1 class="text-4xl w-full flex justify-between items-center font-semibold capitalize">edit task</h1>
+        <section class="w-full flex flex-col gap-2">
+            <label class="cursor-pointer flex w-fit capitalize text-xl" for="title">title</label>
+            <input class="w-full border border-gray-300 rounded-md px-3 py-3" id="title" name="title" placeholder="Enter Task Title" value="{{ task.title }}" required />
+        <section>
+        <section class="w-full flex flex-col gap-2">
+            <label class="cursor-pointer flex w-fit capitalize text-xl" for="description">description</label>
+            <textarea class="w-full border resize-none border-gray-300 rounded-md px-3 py-3" name="description" id="description" placeholder="Enter Task Description" cols="15" rows="5" required>{{ task.description }}</textarea>
+        <section>
+        <section class="w-full flex gap-2">
+            <a href="{{ url_for('index') }}" class="w-full uppercase bg-red-700 text-white px-5 py-2 items-center justify-center flex rounded-md cursor-pointer text-xl" type="button">cancle</a>
+            <button class="bg-green-700 w-full px-5 py-2 rounded-md text-white cursor-pointer uppercase text-xl" type="submit">update</button>
+        </section>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <section class="w-screen max-w-full flex flex-col items-center py-10">
+        <form class="w-1/2 bg-white gap-5 flex flex-col" method="post" action="{{ url_for('add_task') }}">
+            <h1 class="text-4xl w-full flex justify-between items-center font-semibold capitalize">add task <a class="text-sm bg-red-700 text-white rounded-md px-2 py-2" href="{{ url_for('logout' ) }}">logout</a></h1>
+            <section class="w-full flex flex-col gap-2">
+                <label class="cursor-pointer flex w-fit capitalize text-xl" for="title">title</label>
+                <input class="w-full border border-gray-300 rounded-md px-3 py-3" id="title" name="title" placeholder="Enter Task Title" required />
+            <section>
+            <section class="w-full flex flex-col gap-2">
+                <label class="cursor-pointer flex w-fit capitalize text-xl" for="description">description</label>
+                <textarea class="w-full border resize-none border-gray-300 rounded-md px-3 py-3" name="description" id="description" placeholder="Enter Task Description" cols="15" rows="5" required></textarea>
+            <section>
+            <section class="w-full flex gap-2">
+                <button class="w-full uppercase bg-red-700 text-white px-5 py-2 rounded-md cursor-pointer text-xl" type="reset">cancle</button>
+                <button class="bg-green-700 w-full px-5 py-2 rounded-md text-white cursor-pointer uppercase text-xl" type="submit">add</button>
+            </section>
+        </form>
+        <section class="w-full flex flex-col">
+        {% for task in tasks %}
+            <div class="flex flex-col w-full relative px-3 border py-3 border-dotted border-gray-300 my-3 rounded-md">
+                <h1 class="text-xl font-semibold">{{ task.title }}</h1>
+                <p class="w-full text-sm">{{ task.description }}</p>
+                {% if task.completed %}
+                    <span class="absolute top-2 px-3 py-1 rounded-l-md right-0 bg-green-700 text-white">Completed</span>
+                {% else %}
+                    <a href="{{ url_for('complete_task', task_id=task.id) }}" href="" class="absolute top-2 px-3 py-1 rounded-l-md right-0 bg-red-700 text-white">Pending</a>
+                {% endif %}</span>
+                <section class="flex relative items-center mt-2 gap-2">
+                    <a class="text-sm uppercase cursor-pointer rounded-md flex items-center justify-center absolute right-14 text-green-700" href="{{ url_for('edit_task', task_id=task.id) }}">Edit</a>
+                    <a class="text-sm uppercase cursor-pointer rounded-md flex items-center justify-center absolute right-0 text-red-700" href="{{ url_for('delete_task', task_id=task.id) }}">Delete</a>
+                </section>
+            </div>
+        {% endfor %}
+        </section>
+    </section>
+{% endblock %}
